@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  #数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mmall?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+
+#mybatis的相关配置
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  # 别名
+  type-aliases-package: demo.model
+  #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+## 项目相关配置
+#file-service:
+#  # 文件路径
+#  profile: F:\大三上学期\大三上学期JavaEE\大作业\store\target\uploads

@@ -1,0 +1,565 @@
+[MENU]
+
+
+
+
+####1.购物车List列表
+
+**/cart/list**
+
+http://localhost:8080/cart/list
+
+注意点：
+1. 需要先登录,所有的密码都是123
+2. NEED_LOGIN(10, "NEED_LOGIN"),//需要登录的错误编码
+3. 价格的单位是元,保留小数后2位
+
+
+> request
+
+```
+无参数,需要登录状态
+```
+
+> response
+
+success
+
+```
+
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 1,
+                "userId": 13,
+                "productId": 1,
+                "quantity": 1,
+                "productName": "iphone7",
+                "productSubtitle": "双十一促销",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 7199.22,
+                "productStatus": 1,
+                "productTotalPrice": 7199.22,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            },
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 10198.33
+    }
+}
+
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+####2.购物车添加商品
+
+**/cart/add**
+
+http://localhost:8080/cart/add?productId=1&count=10
+
+请注意这个字段，超过数量会返回这样的标识"limitQuantity"
+
+失败的：LIMIT_NUM_FAIL
+成功的：LIMIT_NUM_SUCCESS
+
+
+> request
+
+```
+productId,count
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 1,
+                "userId": 13,
+                "productId": 1,
+                "quantity": 12,
+                "productName": "iphone7",
+                "productSubtitle": "双十一促销",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 7199.22,
+                "productStatus": 1,
+                "productTotalPrice": 86390.64,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            },
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 89389.75
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+####3.更新购物车某个产品数量
+
+**/cart/update**
+
+http://localhost:8080/cart/update?productId=1&count=2
+
+> request
+
+```
+productId,count
+```
+
+> response
+
+响应同2
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 1,
+                "userId": 13,
+                "productId": 1,
+                "quantity": 12,
+                "productName": "iphone7",
+                "productSubtitle": "双十一促销",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 7199.22,
+                "productStatus": 1,
+                "productTotalPrice": 86390.64,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            },
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 89389.75
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+####4.移除购物车某个产品
+
+**/cart/delete_product**
+
+http://localhost:8080/cart/delete_product?productIds=1,3
+
+> request
+
+```
+productIds
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 2999.11
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+####5.购物车选中某个商品
+
+**/cart/select**
+
+http://localhost:8080/cart/select?productId=1
+
+
+> request
+
+```
+productId
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 1,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 2999.11
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+####6.购物车取消选中某个商品
+
+**/cart/un_select**
+
+http://localhost:8080/cart/un_select?productId=2
+
+> 注意返回值中的cartTotalPrice，如果反选之后总价的变化
+
+> request
+
+```
+productId
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 0,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 0
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+
+####7.查询在购物车里的产品数量
+
+**/cart/get_cart_product_count**
+
+http://localhost:8080/cart/get_cart_product_count
+
+> 未登录返回0
+
+> request
+
+```
+无
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": 0
+    
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "出现异常"
+}
+```
+
+------
+
+
+
+
+
+####8.购物车全选
+
+**/cart/select_all**
+
+http://localhost:8080/cart/select_all
+
+> 注意返回值中的cartTotalPrice的变化
+
+> request
+
+```
+无
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 0,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 2999.11
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------
+
+
+
+
+
+####9.购物车取消全选
+
+**/cart/un_select_all**
+
+http://localhost:8080/cart/un_select_all
+
+> 注意返回值中的cartTotalPrice总价的变化
+
+> request
+
+```
+无
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "cartProductVoList": [
+            {
+                "id": 2,
+                "userId": 13,
+                "productId": 2,
+                "quantity": 1,
+                "productName": "oppo R8",
+                "productSubtitle": "oppo促销进行中",
+                "productMainImage": "mainimage.jpg",
+                "productPrice": 2999.11,
+                "productStatus": 1,
+                "productTotalPrice": 2999.11,
+                "productStock": 86,
+                "productChecked": 0,
+                "limitQuantity": "LIMIT_NUM_SUCCESS"
+            }
+        ],
+        "allChecked": true,
+        "cartTotalPrice": 0
+    }
+}
+```
+
+fail
+```
+{
+    "status": 10,
+    "msg": "用户未登录,请登录"
+}
+```
+
+------

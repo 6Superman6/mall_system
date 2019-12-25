@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="form2" action="/manage/product/upload" method="post"  enctype="multipart/form-data">
+    <h2>3.图片上传</h2>
+    <h1>上传图片： <input type="file" name="upload_file" /></h1>
+    <input type="submit" value="upload" />
+</form>
+<p />
+<form action="/user/login" method="post">
+    <h2>登录</h2>
+    <h2>用户名：<input type="text" name="username" /></h2>
+    <h2>密码：<input type="text" name="password" /></h2>
+    <h2><input type="submit" name="登录" /></h2>
+</form>
+<p />
+<form name="form3" action="/manage/product/richtext_img_upload" method="post"  enctype="multipart/form-data">
+    <h2>7.富文本上传图片</h2>
+    <h1>id：<input type="text" name="id" /></h1>
+    <h1>上传图片： <input type="file" name="upload_file" /></h1>
+    <input type="submit" value="upload" />
+</form>
+<p />
+<form name="form4" action="/shipping/test" method="post">
+    <h2>空测试</h2>
+    <h1>a：<input type="text" name="a" /></h1>
+    <h1>b： <input type="text" name="b" /></h1>
+    <input type="submit" value="提交" />
+</form>
+<p/>
+<form name="form5" action="/order/pay" method="get">
+    <h2>支付测试（二维码）</h2>
+    <h1>订单号：<input type="text" name="orderNo" /></h1>
+    <input type="submit" value="提交" />
+</form>
+</body>
+</html>

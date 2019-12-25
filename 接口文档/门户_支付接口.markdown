@@ -1,0 +1,133 @@
+[MENU]
+
+
+
+------
+
+####1.支付
+
+**/order/pay**
+
+http://localhost:8080/order/pay?orderNo=1485158676346
+
+
+> request
+
+```
+orderNo
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": {
+        "orderNo": "1485158676346",
+        "qrPath": "http://img.happymmall.com/qr-1492329044075.png"
+    }
+}
+```
+
+fail
+```
+{
+    "status": 1,
+    "msg": "支付宝生成订单失败"
+}
+```
+
+------
+
+####2.查询订单支付状态
+
+**/order/query_order_pay_status**
+
+http://localhost:8080/order/query_order_pay_status?orderNo=1485158676346
+
+
+> request
+
+```
+orderNo
+```
+
+> response
+
+success
+
+```
+{
+    "status": 0,
+    "data": true
+}
+
+
+```
+
+fail
+```
+{
+    "status": 1,
+    "msg": "该用户并没有该订单,查询无效"
+}
+```
+
+------
+
+
+####3.支付宝回调
+
+参考支付宝回调文档：
+https://support.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.mFogPC&treeId=193&articleId=103296&docType=1
+
+**/order/alipay_callback**
+
+> request
+
+```
+HttpServletRequest
+```
+
+> response
+
+success
+
+```
+success
+```
+
+fail
+```
+failed
+```
+
+------
+
+
+####0.模板
+
+**/REPLACE/**
+
+> request
+
+```
+k
+```
+
+> response
+
+success
+
+```
+k
+```
+
+fail
+```
+k
+```
+
+------
